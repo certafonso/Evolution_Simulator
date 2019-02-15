@@ -4,7 +4,6 @@ class Being:
     def __init__(self,food_comsumption,food_production,food_initial):
         self.food_comsumption = food_comsumption
         self.food_production = food_production
-        self.food_initial = food_initial
         self.food_stored = food_initial
         self.alive = True
         self.Tick = 0
@@ -67,10 +66,11 @@ def reproduction(Sample,Parents,mutation_factor):
     return Sample
 
 def pass_generation(Sample):
-    if len(sample) > 1: #applies natural selection and reproduction
+    if len(Sample) > 1: #applies natural selection and reproduction
         Sample = reproduction(Sample,natural_selection(Sample),mutation_factor)
-    for i in range(0,len(Sample[Generation][0])): #makes all the beings pass a life
-        Sample[Generation][0][i] = Sample[Generation][0][i].pass_life()
+    for i in range(0,len(Sample[-1][0])): #makes all the beings pass a life
+        Sample[-1][0][i] = Sample[-1][0][i].pass_life()
+    return Sample
 
 def main():
     Sample = create_Sample(10)
@@ -78,5 +78,6 @@ def main():
     for Generation in range(0,n_generations):
         pass_generation(Sample)
 
-if __name__ = "__main__":
-    main()
+if __name__ == "__main__":
+    # main()
+    print(pass_generation(create_Sample(10)))
