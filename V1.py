@@ -64,7 +64,6 @@ def reproduction(Sample,Parents,mutation_factor):
             Sample[-1][0].append(Being(comsumption,production,1000))
             Sample[-1][1].append(comsumption)
             Sample[-1][2].append(production)
-    print(Sample)
     return Sample
 
 def pass_generation(Sample):
@@ -76,10 +75,10 @@ def main():
     mutation_factor = 10
     Sample_size = 10 #Sample size has to be a even number
     Sample = create_Sample(Sample_size)
-    Averages = []
+    Percentiles = []
     while True:
         print("Welcome to the Evolution simulator. What do you want to do?\n\t(0) Exit\n\t(1) See current sample\n\t(2) Pass generations")
-        if Averages != []: print("\t(3) See the evolution")
+        if Percentiles != []: print("\t(3) See the evolution")
         option = int(input(""))
 
         if option == 0:
@@ -97,7 +96,7 @@ def main():
                         if Sample_size % 2 == 0:
                             break
                     Sample = create_Sample(Sample_size)
-                    Averages = []
+                    Percentiles = []
                     break
                 elif option == 3:
                     break
@@ -105,16 +104,13 @@ def main():
         elif option == 2:
             n_generations = int(input("How many generations do you want to pass?"))
             for Generation in range(0,n_generations):
-                print(Generation)
-                # print(Sample)
                 if type(Sample[-1][0][0]) is int: #applies natural selection and reproduction
                     Sample = reproduction(Sample,natural_selection(Sample),mutation_factor)
-                    print("Sample")
                 pass_generation(Sample)
-                Data_Treatment.calc_average(Sample[-1],Averages)
+                Percentiles = Data_Treatment.calc_Percentile(Sample[-1][1],Percentiles)
 
-        #elif option == 3:
-
+        elif option == 3:
+            Data_Treatment.Show_graph(Percentiles)
 
 if __name__ == "__main__":
     main()
