@@ -1,7 +1,5 @@
 # Evolution Simulator V.1.0.
 This is a program that tries to simulate the evolution of a simple being.
-
-Right now there isn't any way to see what's happening but I'll fix that soon.
 ## How does it work?
 In this version, every being has only 3 attributes:
 - The quantity of food that it consumes every tick;
