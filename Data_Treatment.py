@@ -1,19 +1,20 @@
 import numpy
 import matplotlib.pyplot as plt
 
-def calc_Percentile(Sample,Percentiles): #takes one generation per run
-    if Percentiles == []:
-    	Percentiles = [[],[],[],[],[],[],[],[],[],[],[]] #saves percentiles from 0 to 100
+def calc_Average(Sample,Averages): #takes one generation per run
+    if Averages == []:
+    	Averages = [[],[],[]] #saves Averages, maximum and minimum
 
-    for i in range(0,11):
-        Percentiles[i].append(numpy.percentile(Sample,i*10)) #calculates Percentile
-    return Percentiles
+    Averages[0].append(sum(Sample)/len(Sample)) #calculates Average
+    Averages[1].append(max(Sample)) #calculates maximum
+    Averages[2].append(min(Sample)) #calculates minimum
+    return Averages
 
-def Show_graph(Percentiles):
-    x_max = len(Percentiles[0])-1
+def Show_graph(Averages):
+    x_max = len(Averages[0])-1
     generations = list(range(0,x_max+1))
-    y_max = max(Percentiles[10])+2
-    plt.plot(generations, Percentiles[0],"k-",generations, Percentiles[1],"k-",generations, Percentiles[2],"k-",generations, Percentiles[3],"k-",generations, Percentiles[4],"k-",generations, Percentiles[5],"r-",generations, Percentiles[6],"k-",generations, Percentiles[7],"k-",generations, Percentiles[8],"k-",generations, Percentiles[9],"k-",generations, Percentiles[10],"k-")
+    y_max = max(Averages[1])+2
+    plt.plot(generations, Averages[0],"r-",generations, Averages[1],"k-",generations, Averages[2],"k-")
     plt.axis([0,x_max,0,y_max])
     plt.show()
 
