@@ -107,7 +107,7 @@ def main():
                 if type(Sample[-1][0][0]) is int: #applies natural selection and reproduction
                     Sample = reproduction(Sample,natural_selection(Sample),mutation_factor)
                 pass_generation(Sample)
-                Averages = Data_Treatment.calc_Average(Sample[-1][1],Averages)
+                Averages = Data_Treatment.calc_Average(Sample[-1][0],Averages)
                 print("Generation",len(Sample),"of",len(Sample)+n_generations-Generation-1,"passed")
 
         elif option == 3:
