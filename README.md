@@ -8,5 +8,3 @@ In this version, I simplified the previous version by merging the comsumption an
 When the food stored is below 0 the being dies.
 
 Each generation, the beings that survived the longer will reproduce (asexually) and create new mutated beings and the cycle will repeat.
-
-By simplifying the program somehow it broke and now the lifetime doesn´t evolve and just keeps stable.
