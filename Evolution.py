@@ -102,8 +102,13 @@ def main():
         elif option == 3:
             Data_Treatment.Show_graph(Averages)
 
-        #elif option == 4:
-
+        elif option == 4:
+            while True:
+                file_name = input("File name:") + ".csv"
+                print("The file will be called:",file_name)
+                if input("Y/N: ") in ["Y","y"]:
+                    break
+            Data_Treatment.Export_Data(Sample,file_name)
 
 if __name__ == "__main__":
     main()
