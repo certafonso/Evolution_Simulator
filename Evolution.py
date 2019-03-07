@@ -67,6 +67,8 @@ def main():
     Sample_size = 100 #Sample size has to be a even number
     Sample = create_Sample(Sample_size,food_initial)
     Averages = []
+    Averages1 = []
+    Averages2 = []
     while True:
         print("Welcome to the Evolution simulator. What do you want to do?\n\t(0) Exit\n\t(1) See current sample\n\t(2) Pass generations")
         if Averages != []: print("\t(3) See the evolution\n\t(4) Export data")
@@ -88,6 +90,8 @@ def main():
                             break
                     Sample = create_Sample(Sample_size,food_initial)
                     Averages = []
+                    Averages1 = []
+                    Averages2 = []
                     break
                 elif option == 3:
                     break
@@ -103,6 +107,8 @@ def main():
 
         elif option == 3:
             Data_Treatment.Show_graph(Averages)
+            Data_Treatment.Show_graph(Averages1)
+            Data_Treatment.Show_graph(Averages2)
 
         elif option == 4:
             while True:
