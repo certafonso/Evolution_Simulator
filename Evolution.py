@@ -19,11 +19,11 @@ class Being:
             self.pass_tick()
         return self.Tick #returns lifetime at the end
 
-def create_Sample(size):
+def create_Sample(size,food_initial):
     Sample = [[[],[]]] #[[[Saves the beings and the lifetime],[saves consumption],[saves production]]]
     for i in range(0,size): #creates beings with random atributes
-        comsumption = random.randint(10,200)
-        Sample[0][0].append(Being(comsumption,1000))
+        comsumption = random.randint(100,200)
+        Sample[0][0].append(Being(comsumption,food_initial))
         Sample[0][1].append(comsumption)
     return Sample
 
@@ -44,14 +44,15 @@ def natural_selection(Sample):
 
     return Survivors
 
-def reproduction(Sample,Parents,mutation_factor):
+
+def reproduction(Sample,Parents,mutation_factor,food_initial):
     Sample.append([[],[]])
     for Parent in Parents:
         for child in range(0,2):
             comsumption = 0
             while comsumption <= 0:
                 comsumption = Sample[-2][1][Parent] + random.randint(-mutation_factor,mutation_factor) #mutates the attributes by a mutation factor
-            Sample[-1][0].append(Being(comsumption,1000))
+            Sample[-1][0].append(Being(comsumption,food_initial))
             Sample[-1][1].append(comsumption)
     return Sample
 
@@ -61,9 +62,10 @@ def pass_generation(Sample):
     return Sample
 
 def main():
-    mutation_factor = 100
-    Sample_size = 1000 #Sample size has to be a even number
-    Sample = create_Sample(Sample_size)
+    food_initial = 100000
+    mutation_factor = 1
+    Sample_size = 100 #Sample size has to be a even number
+    Sample = create_Sample(Sample_size,food_initial)
     Averages = []
     while True:
         print("Welcome to the Evolution simulator. What do you want to do?\n\t(0) Exit\n\t(1) See current sample\n\t(2) Pass generations")
@@ -84,7 +86,7 @@ def main():
                         if option == 2: Sample_size = int(input("What is the new size? (has to be a even number)"))
                         if Sample_size % 2 == 0:
                             break
-                    Sample = create_Sample(Sample_size)
+                    Sample = create_Sample(Sample_size,food_initial)
                     Averages = []
                     break
                 elif option == 3:
@@ -94,7 +96,7 @@ def main():
             n_generations = int(input("How many generations do you want to pass?"))
             for Generation in range(0,n_generations):
                 if type(Sample[-1][0][0]) is int: #applies natural selection and reproduction
-                    Sample = reproduction(Sample,natural_selection(Sample),mutation_factor)
+                    Sample = reproduction(Sample,natural_selection(Sample),mutation_factor,food_initial)
                 pass_generation(Sample)
                 Averages = Data_Treatment.calc_Average(Sample[-1][0],Averages)
                 print("Generation",len(Sample),"of",len(Sample)+n_generations-Generation-1,"passed")
