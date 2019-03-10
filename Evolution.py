@@ -5,19 +5,9 @@ class Being:
     def __init__(self,food_comsumption,food_initial):
         self.food_comsumption = food_comsumption
         self.food_stored = food_initial
-        self.alive = True
-        self.Tick = 0
-
-    def pass_tick(self):
-        self.food_stored = self.food_stored - self.food_comsumption #for every tick reduces the food comsumed and adds food produced
-        if self.food_stored < 0: # checks if being is still alive (has food stored)
-            self.alive = False
-        self.Tick += 1 #marks 1 more tick
 
     def pass_life(self):
-        while self.alive: #while being is still alive passes a tick
-            self.pass_tick()
-        return self.Tick #returns lifetime at the end
+        return self.food_stored//self.food_comsumption #returns lifetime at the end
 
 def create_Sample(size,food_initial):
     Sample = [[[],[]]] #[[[Saves the beings and the lifetime],[saves consumption],[saves production]]]
@@ -44,7 +34,6 @@ def natural_selection(Sample):
 
     return Survivors
 
-
 def reproduction(Sample,Parents,mutation_factor,food_initial):
     Sample.append([[],[]])
     for Parent in Parents:
@@ -67,8 +56,6 @@ def main():
     Sample_size = 100 #Sample size has to be a even number
     Sample = create_Sample(Sample_size,food_initial)
     Averages = []
-    Averages1 = []
-    Averages2 = []
     while True:
         print("Welcome to the Evolution simulator. What do you want to do?\n\t(0) Exit\n\t(1) See current sample\n\t(2) Pass generations")
         if Averages != []: print("\t(3) See the evolution\n\t(4) Export data")
@@ -90,8 +77,6 @@ def main():
                             break
                     Sample = create_Sample(Sample_size,food_initial)
                     Averages = []
-                    Averages1 = []
-                    Averages2 = []
                     break
                 elif option == 3:
                     break
@@ -107,8 +92,6 @@ def main():
 
         elif option == 3:
             Data_Treatment.Show_graph(Averages)
-            Data_Treatment.Show_graph(Averages1)
-            Data_Treatment.Show_graph(Averages2)
 
         elif option == 4:
             while True:
